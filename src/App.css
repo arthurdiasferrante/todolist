@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 #root {
-    min-height: 100vh;
-    display: flex;  
-    background-color: var(--color-slate-800);
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--color-slate-800);
   --color-slate-50: oklch(0.984 0.003 247.858);
   --color-slate-100: oklch(0.968 0.007 247.896);
   --color-slate-200: oklch(0.929 0.013 255.508);
@@ -21,54 +19,52 @@
   --color-slate-950: oklch(0.129 0.042 264.695);
 }
 
-
 .app {
-    max-width: 600px;
-    width: 37.5rem;
-    margin: 2rem auto;
-    border-radius: 10px;
-    padding: 1rem;
-    background-color: var(--color-slate-50);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    font-family: Arial, Helvetica, sans-serif;
+  max-width: 600px;
+  width: 37.5rem;
+  margin: 2rem auto;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: var(--color-slate-50);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-    font-weight: 700;
-    font-size: 1.625rem;
-
+  font-weight: 700;
+  font-size: 1.625rem;
 }
 
 form {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 input {
-    flex: 1;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    background-color: white;
-    margin-top: 0.5rem;
-    border: solid 2px black;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: white;
+  margin-top: 0.5rem;
+  border: solid 2px black;
 }
 
 button {
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 li {
-    border-bottom: 2px solid #ccc;
-    padding: 0.5rem;
+  border-bottom: 2px solid #ccc;
+  padding: 0.5rem;
 }
 
 li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
