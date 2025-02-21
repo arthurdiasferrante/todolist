@@ -3,7 +3,16 @@ import "./App.css";
 import { getTasks } from "./services/api";
 
 function App() {
-  getTasks();
+  const [list, setList] = useState("");
+
+  useEffect(() => {
+    getTasks().then((result) => {
+      setList(result);
+      console.log(result);
+    });
+  }, []);
+
+  console.log(list);
 
   return (
     <div className="app">
@@ -16,11 +25,14 @@ function App() {
         </button>
       </form>
 
-      <ul className="list-none p-2 m-0 rounded-lg">
-        <li>passea com meg</li>
-        <li>passea com digao</li>
-        <li>oejkgwg</li>
-        <li>rheahk</li>
+      <ul className="list-none p-2 m-0 rounded-lg" id="tasks">
+        {list && list.length > 0 && (
+          <ul>
+            {list.map((item) => (
+              <li key={item.id}>{item.title}</li>
+            ))}
+          </ul>
+        )}
       </ul>
     </div>
   );
