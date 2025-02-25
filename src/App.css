@@ -51,7 +51,7 @@ input {
   border: solid 2px black;
 }
 
-button {
+#submit-button {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   color: white;
@@ -60,11 +60,8 @@ button {
   cursor: pointer;
 }
 
+
 li {
   border-bottom: 2px solid #ccc;
-  padding: 0.5rem;
 }
 
-li:last-child {
-  border-bottom: none;
-}
