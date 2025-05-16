@@ -7,7 +7,8 @@ import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 function App() {
   const [list, setList] = useState("");
 
-  // pega as tarefas
+  const [tarefa, setTarefa] = useState("");
+  const [alerta, setAlerta] = useState(false);
 
   useEffect(() => {
     getTasks().then((result) => {
@@ -15,11 +16,9 @@ function App() {
     });
   }, []);
 
-  // digitar tarefas novas
-
-  const [tarefa, setTarefa] = useState("");
-
-  const [alerta, setAlerta] = useState(false);
+  useEffect(() => {
+    setAlerta(false);
+  }, [tarefa]);
 
   // alerta de texto vazio
 
