@@ -13,8 +13,15 @@ function App() {
     });
   }, []);
 
-
   console.log(list);
+
+  const deleteTaskExecuter = function(id) {
+    deleteTask(id).then(() => {
+      getTasks().then((result) => {
+        setList(result);
+      }); 
+    });
+  };
 
   return (
     <div className="app">
@@ -37,7 +44,10 @@ function App() {
             {list.map((item) => (
               <li
                 key={item.id}
-                className="flex justify-between items-center p-2 bg-gray-100 rounded-lg mb-2"
+                className={
+                  "flex justify-between items-center p-2 bg-gray-100 rounded-lg mb-2" +
+                  (item.status === "deleted" ? " bg-red-200" : "")
+                }
               >
                 <span>{item.title}</span>
                 <div className="flex gap-2">
@@ -46,7 +56,7 @@ function App() {
                   </button>
                   <button
                     className="text-red-500 hover:text-red-700 left"
-                    onClick={() => deleteTask(item.id)}
+                    onClick={() => deleteTaskExecuter(item.id)}
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
@@ -61,3 +71,5 @@ function App() {
 }
 
 export default App;
+
+// <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}>
