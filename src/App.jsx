@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getTasks, deleteTask } from "./services/api";
+import { getTasks, deleteTask, createTask } from "./services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [list, setList] = useState("");
+
+  // pega as tarefas
 
   useEffect(() => {
     getTasks().then((result) => {
@@ -13,13 +15,29 @@ function App() {
     });
   }, []);
 
-  console.log(list);
+  // digitar tarefas novas
 
-  const deleteTaskExecuter = function(id) {
+  const [tarefa, setTarefa] = useState("");
+
+  // botao que lanca tarefas novas
+
+  const submitTask = (event) => {
+    event.preventDefault();
+    createTask(tarefa).then(() => {
+      getTasks().then((result) => {
+        setList(result);
+        setTarefa("")
+      })
+    });
+  };
+
+  // botao que deleta as tarefas
+
+  const deleteTaskExecuter = function (id) {
     deleteTask(id).then(() => {
       getTasks().then((result) => {
         setList(result);
-      }); 
+      });
     });
   };
 
@@ -27,8 +45,13 @@ function App() {
     <div className="app">
       <h1 className="text-slate-800 text-center p-4">To-Do List</h1>
 
-      <form className="">
-        <input type="text" placeholder="Adicione uma nova tarefa..." />
+      <form onSubmit={submitTask} className="">
+        <input
+          type="text"
+          placeholder="Adicione uma nova tarefa..."
+          value={tarefa}
+          onChange={(event) => setTarefa(event.target.value)}
+        />
         <button
           type="submit"
           id="submit-button"
@@ -49,7 +72,11 @@ function App() {
                   (item.status === "deleted" ? " bg-red-200" : "")
                 }
               >
-                <span>{item.title}</span>
+                <span
+                  className={item.status === "deleted" ? "animated-spin" : ""}
+                >
+                  {item.title}
+                </span>
                 <div className="flex gap-2">
                   <button className="text-blue-500 hover:text-blue-700">
                     <FontAwesomeIcon icon={faEdit} />

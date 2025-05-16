@@ -10,7 +10,13 @@ export async function getTasks() {
   return response;
 }
 
-export async function createTask() {}
+export async function createTask(titulo) {
+  console.log(titulo);
+  const response = await axios.post(API_URL, {
+    title: titulo,
+    status: "pending",
+  });
+}
 
 export async function deleteTask(id) {
   const response = await axios.put(`${API_URL}/${id}`, {
