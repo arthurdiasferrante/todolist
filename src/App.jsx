@@ -19,15 +19,30 @@ function App() {
 
   const [tarefa, setTarefa] = useState("");
 
+  const [alerta, setAlerta] = useState(false);
+
+  // alerta de texto vazio
+
+  function taskAlert({ condition }) {
+    return (
+      condition && <span className="text-red-600">Você não digitou nada!</span>
+    );
+  }
+
   // botao que lanca tarefas novas
 
   const submitTask = (event) => {
     event.preventDefault();
+    if (tarefa === "") {
+      setAlerta(true);
+      return;
+    }
     createTask(tarefa).then(() => {
       getTasks().then((result) => {
         setList(result);
-        setTarefa("")
-      })
+        setTarefa("");
+        setAlerta(false);
+      });
     });
   };
 
@@ -46,19 +61,22 @@ function App() {
       <h1 className="text-slate-800 text-center p-4">To-Do List</h1>
 
       <form onSubmit={submitTask} className="">
-        <input
-          type="text"
-          placeholder="Adicione uma nova tarefa..."
-          value={tarefa}
-          onChange={(event) => setTarefa(event.target.value)}
-        />
-        <button
-          type="submit"
-          id="submit-button"
-          className="bg-blue-800 text-center p-3 hover:bg-blue-900"
-        >
-          Adicionar
-        </button>
+        <div className="form-box">
+          <input
+            type="text"
+            placeholder="Adicione uma nova tarefa..."
+            value={tarefa}
+            onChange={(event) => setTarefa(event.target.value)}
+          />
+          <button
+            type="submit"
+            id="submit-button"
+            className="bg-blue-800 text-center p-3 hover:bg-blue-900"
+          >
+            Adicionar
+          </button>
+        </div>
+        {taskAlert({ condition: alerta })}
       </form>
 
       <ul className="list-none p-2 m-0 rounded-lg" id="tasks">
@@ -69,7 +87,7 @@ function App() {
                 key={item.id}
                 className={
                   "flex justify-between items-center p-2 bg-gray-100 rounded-lg mb-2" +
-                  (item.status === "deleted" ? " bg-red-200" : "")
+                  (item.status === "deleted" ? "bg-red-200" : "")
                 }
               >
                 <span
